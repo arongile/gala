@@ -964,7 +964,7 @@ namespace Gala
 				size_change_completed (actor);
 				return;
 			}	
-
+			bool size_change_completed_called = false;
 			ulong signal_id = 0U;
 			signal_id = window.size_changed.connect (() => {
 				window.disconnect (signal_id);
@@ -982,8 +982,18 @@ namespace Gala
 						handle_fullscreen_window (actor.get_meta_window (), which_change);
 						break;
 				}
-
-				size_change_completed (actor);
+				if (!size_change_completed_called)
+					size_change_completed (actor);
+					size_change_completed_called = true;
+				}
+			});
+			ulong position_signal_id = 0U;
+			position_signal_id = window.position_changed.connect (() => {
+				window.disconnect (position_signal_id);
+				if (!size_change_completed_called)
+					size_change_completed (actor);
+					size_change_completed_called = true;
+				}
 			});
 		}
 

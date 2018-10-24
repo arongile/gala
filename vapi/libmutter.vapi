@@ -644,6 +644,7 @@ namespace Meta {
 		public void set_opaque_region (owned Cairo.Region opaque_region);
 		public bool update_area (int x, int y, int width, int height);
 		public signal void size_changed ();
+		public signal void position_changed ();
 	}
 #if HAS_MUTTER328
 	[CCode (cheader_filename = "meta/main.h", type_id = "meta_stage_get_type ()")]
