@@ -982,7 +982,7 @@ namespace Gala
 						handle_fullscreen_window (actor.get_meta_window (), which_change);
 						break;
 				}
-				if (!size_change_completed_called)
+				if (!size_change_completed_called) {
 					size_change_completed (actor);
 					size_change_completed_called = true;
 				}
@@ -990,7 +990,7 @@ namespace Gala
 			ulong position_signal_id = 0U;
 			position_signal_id = window.position_changed.connect (() => {
 				window.disconnect (position_signal_id);
-				if (!size_change_completed_called)
+				if (!size_change_completed_called) {
 					size_change_completed (actor);
 					size_change_completed_called = true;
 				}
